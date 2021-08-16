@@ -6,7 +6,7 @@ const Display = (props) => {
       <ul>
         {props.todos.map((todo) => (
           <li key={todo._id}>
-            {todo.reminder} - {todo.completed ? "Done" : "Incomplete"}
+            {todo.reminder} - {todo.completed ? "Done" : "Incomplete"} -{" "}
             <button
               onClick={(e) => {
                 props.editThisTodo(todo);

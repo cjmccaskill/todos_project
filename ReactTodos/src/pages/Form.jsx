@@ -5,7 +5,7 @@ const Form = (props) => {
   const {
     initialState = { reminder: "", completed: false },
     submitFunc = () => {},
-    label,
+    label = "submit",
     history,
   } = props;
 

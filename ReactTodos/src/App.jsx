@@ -77,14 +77,14 @@ function App(props) {
             deleteTodo={deleteTodo}
           />
         </Route>
-        <Route path="/new">
+        <Route exact path="/new">
           <Form
             submitFunc={createTodo}
             history={props.history}
             label="create"
           />
         </Route>
-        <Route path="/edit">
+        <Route exact path="/edit">
           <Form
             submitFunc={updateTodo}
             history={props.history}

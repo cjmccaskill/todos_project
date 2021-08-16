@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const PORT = process.env.PORT || 3000;
+const TodoRouter = require("./controllers/todo");
 
 // Create app obj
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("You have 👊🏼 it the default route... nothing to 👀 here.");
 });
+app.use("/todos", TodoRouter);
 
 // Server started
 app.listen(PORT, () => {

@@ -5,7 +5,7 @@ import Form from "./pages/Form";
 
 function App() {
   // API base url
-  const url = "http://localhost:10000/todos";
+  const url = "https://todos-project-api-081521.herokuapp.com/todos";
 
   // Make state to hold API data
   const [todos, setTodos] = useState(null);

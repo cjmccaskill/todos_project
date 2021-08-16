@@ -3,7 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import Display from "./pages/Display";
 import Form from "./pages/Form";
 
-function App() {
+function App(props) {
   // API base url
   const url = "https://todos-project-api-081521.herokuapp.com/todos";
 
@@ -15,6 +15,20 @@ function App() {
     const response = await fetch(url);
     const data = await response.json();
     setTodos(data);
+  };
+
+  // Function to Create Todos
+  const createTodo = async (newTodo) => {
+    // make new todo
+    await fetch(url, {
+      mehtod: "post",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTodo),
+    });
+    // update list of todos
+    getTodos();
   };
 
   useEffect(() => {
@@ -29,7 +43,11 @@ function App() {
           <Display todos={todos} />
         </Route>
         <Route path="/new">
-          <Form />
+          <Form
+            submitFunc={createTodo}
+            history={props.history}
+            label="create"
+          />
         </Route>
         <Route path="/edit">
           <Form />

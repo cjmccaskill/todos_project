@@ -5,7 +5,24 @@ const Display = (props) => {
     return (
       <ul>
         {props.todos.map((todo) => (
-          <li key={todo._id}>{todo.reminder}</li>
+          <li key={todo._id}>
+            {todo.reminder} - {todo.completed ? "Done" : "Incomplete"}
+            <button
+              onClick={(e) => {
+                props.editThisTodo(todo);
+                props.history.push("/edit");
+              }}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => {
+                props.deleteTodo(todo);
+              }}
+            >
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     );

@@ -10,6 +10,9 @@ function App(props) {
   // Make state to hold API data
   const [todos, setTodos] = useState(null);
 
+  // State to hold edit target
+  const [todoToEdit, setTodoToEdit] = useState({});
+
   // Function to retrieve data
   const getTodos = async () => {
     const response = await fetch(url);
@@ -31,6 +34,30 @@ function App(props) {
     getTodos();
   };
 
+  // Function to Update Todos
+  const updateTodo = async (updateTodo) => {
+    // make new todo
+    await fetch(url + `/${updateTodo._id}`, {
+      mehtod: "put",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateTodo),
+    });
+    // update list of todos
+    getTodos();
+  };
+
+  // Function to Delete Todos
+  const deleteTodo = async (deletedTodo) => {
+    // make new todo
+    await fetch(url + `/${deletedTodo._id}`, {
+      mehtod: "delete",
+    });
+    // update list of todos
+    getTodos();
+  };
+
   useEffect(() => {
     getTodos();
   }, []);
@@ -38,9 +65,17 @@ function App(props) {
   return (
     <div className="App">
       <h1>CJ's Todo App</h1>
+      <Link to="/new">
+        <button>Create a Todo</button>
+      </Link>
       <Switch>
         <Route exact path="/">
-          <Display todos={todos} />
+          <Display
+            todos={todos}
+            editThisTodo={setTodoToEdit}
+            history={props.history}
+            deleteTodo={deleteTodo}
+          />
         </Route>
         <Route path="/new">
           <Form
@@ -50,7 +85,12 @@ function App(props) {
           />
         </Route>
         <Route path="/edit">
-          <Form />
+          <Form
+            submitFunc={updateTodo}
+            history={props.history}
+            label="update"
+            initialState={todoToEdit}
+          />
         </Route>
       </Switch>
     </div>

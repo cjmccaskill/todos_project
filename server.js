@@ -5,8 +5,6 @@ const morgan = require("morgan");
 const PORT = process.env.PORT || 3000;
 const TodoRouter = require("./controllers/todo");
 
-const PORT = process.env.PORT || 3000;
-
 // Create app obj
 const app = express();
 
